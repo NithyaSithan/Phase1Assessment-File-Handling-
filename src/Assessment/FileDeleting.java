@@ -15,14 +15,36 @@ public class FileDeleting {
 	public static void deleteFile() {
 		
 		Scanner reader = new Scanner(System.in);
-		System.out.println("Enter the file path to be deleted: ");
+		System.out.println("Enter the Directory Path: ");
+		String fileDir = reader.nextLine();
+		System.out.println("Enter the file name to be deleted: ");
 		String fileName = reader.nextLine();
 		
 		
 		 try
 	        { 
-			 Path path = Paths.get(fileName);
-			 
+			 File dir = new File(fileDir);
+		        if(dir.isDirectory())
+		        {
+		        	 File[] fileList = dir.listFiles();
+		        	 String[] flist = dir.list();	
+		        	 int flag = 0;
+		        		if(flist == null) {
+		        			System.out.println("Empty directory");
+		        		}
+		        		else {
+		        			for(int i = 0; i < flist.length; i++) {
+		        				String filename = flist[i];
+		        				
+		        				if(filename.equals(fileName)) {
+		        					
+		        					flag = 1;
+		        				}
+		        			}
+		        		}
+		        		if(flag == 1) {
+			 Path path = Paths.get(fileDir+"/"+fileName);
+						 
 	           boolean fileDelete =  Files.deleteIfExists(path);
 	           if(fileDelete)
 	           {
@@ -32,6 +54,18 @@ public class FileDeleting {
 	           {
 	        	   System.out.println("Deletion Unsuccessful. File does not exist."); 
 	           }
+		        }
+		        else
+		        {
+		        	System.out.println("File Not Found");
+		        }
+		        
+		        } 	
+		        else
+		        {
+		        	System.out.println("Invalid directory.");
+		        }
+		        	
 	            
 	        } 
 	        catch(NoSuchFileException e) 

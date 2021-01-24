@@ -38,8 +38,8 @@ public class SearchFile {
    		}
    		else {
    			for(int i = 0; i < flist.length; i++) {
-   				String filename = flist[i];
-   				if(filename.equalsIgnoreCase(name)) {
+   				String filename = flist[i];   				
+   				if(filename.equals("name")) {
    					System.out.println(filename + " found");
    					flag = 1;
    				}
